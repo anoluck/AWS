@@ -1,0 +1,7 @@
+]0;MINGW64:/c/Users/Anoluck/Desktop/test GITHUB
+[32mAnoluck@AnoluckPC [35mMINGW64 [33m~/Desktop/test GITHUB[36m (master)[0m
+$ 
+]0;MINGW64:/c/Users/Anoluck/Desktop/test GITHUB
+[32mAnoluck@AnoluckPC [35mMINGW64 [33m~/Desktop/test GITHUB[36m (master)[0m
+$ if [ "$1" == 'test' ]; then
+> 

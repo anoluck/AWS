@@ -3,9 +3,8 @@
 # Stop process if there is an error
 set -e
 
-#exec &> log.out
-
-exec &> >(tee log.out) 
+# output fd 1&2 to terminal and log.out file 
+exec &> >(tee -a log.out)
 
 if [ "$1" == 'test' ]; then
 	echo "working"
@@ -13,14 +12,6 @@ else
 	echo 'Not Working' 1>&2
 fi
 
-#Use process substitution with & redirection and exec:
 
-#exec &> >(tee -a "$log_file")
-#echo "This will be logged to the file and to the screen"
-#$log_file will contain the output of the script and any subprocesses, and the output will also be printed to the screen.
-
-#>(...) starts the process ... and returns a file representing its standard input.
-
-#exec &> ... redirects both standard output and standard error into ... for the remainder of the script (use just exec > ... for stdout only).
-
-#tee -a appends its standard input to the file, and also prints it to the screen.
+# i.e. running remote script locally
+#bash <(curl -s https://raw.githubusercontent.com/anoluck/AWS/master/testBash?token=AEGHN476YQOICJYKZ64DMR3A4KJ64) test
