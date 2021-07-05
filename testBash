@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Stop process if there is an error
+set -e
+
+exec 1> log.out | tee /dev/tty 2> error.out
+
+if [ "$1" == 'test' ]; then
+	echo "working"
+else
+	echo 'Not Working' 1>&2
+fi
+
