@@ -22,4 +22,6 @@ launchScript=$(curl -s https://raw.githubusercontent.com/anoluck/AWS/master/Inst
 
 ; = run 1st then 2nd cmd regardless
 
-grep -q "test123" ./test || sed -i '/line 2/a test123' ./test
+grep -q "[mysqld]" /etc/mysql/mariadb.conf.d/50-server.cnf || sudo sed -i '/[mysqld]/a local-infile=0' /etc/mysql/mariadb.conf.d/50-server.cnf
+
+sed -zi '/NoDisplay=true/!s/$/\nNoDisplay=true/' file
