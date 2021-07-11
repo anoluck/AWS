@@ -31,7 +31,7 @@ sudo apt-get install -y apache2 php libapache2-mod-php mariadb-server mariadb-cl
 (printf "\ny\n$mysqlPass\n$mysqlPass\ny\ny\ny\ny\n" | sudo mysql_secure_installation) &&
 
 # Secure mariaDB step1 remove local-infile
-# grep find if (local-infile=0) exist (if false ||) sed (in-place -i) find (mysqld escape bracket) then (/a append) 
+# grep find if (local-infile=0) exist (if false ||) sed (in-place -i [make changes to file not only show]) find (mysqld escape bracket) then (/a append) 
 grep -q "local-infile=0" /etc/mysql/mariadb.conf.d/50-server.cnf || sudo sed -i '/\[mysqld\]/a local-infile=0' /etc/mysql/mariadb.conf.d/50-server.cnf
 
 
