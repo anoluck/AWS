@@ -6,6 +6,13 @@
 #Install WordPress 
 ######################
 
+
+# Set password (Prod change within mysql or pass in 1st arg)
+mysqlPass=$1
+if [ -z $1 ]; then
+	mysqlPass='7h15is@hardpA$sw0rd'
+fi
+
 # Stop process if there is an error
 set -e
 
@@ -20,7 +27,7 @@ sudo apt-get install -y apache2 php libapache2-mod-php mariadb-server mariadb-cl
 
 # Root Pass \n -> Set Pass y\n -> Enter Pass1 7h15is@hardpA$sw0rd\n -> Enter Pass2 7h15is@hardpA$sw0rd\n -> Remove Anonymous y\n -> Disable Remote y\n -> Remove TestDB y\n -> Reload Privs y\n
 # Root User plugin=unix_socket(LogIn via Root) change rootPass wont matter; To use password [update mysql.user set plugin="mysql_native_password" where User='root';]
-printf "\ny\n7h15is@hardpA$sw0rd\n7h15is@hardpA$sw0rd\ny\ny\ny\ny\n" | sudo mysql_secure_installation
+printf "\ny\n$mysqlPass\n$mysqlPass\ny\ny\ny\ny\n" | sudo mysql_secure_installation
 
 
 #config file
