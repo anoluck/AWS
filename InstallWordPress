@@ -8,6 +8,7 @@
 
 
 # Set password (Prod change within mysql or pass in 1st arg)
+# if arg $1 is (null -z) then default pw is 7h15is@hardpA$sw0rd
 mysqlPass=$1
 if [ -z $1 ]; then
 	mysqlPass='7h15is@hardpA$sw0rd'
@@ -28,6 +29,17 @@ sudo apt-get install -y apache2 php libapache2-mod-php mariadb-server mariadb-cl
 # Root Pass \n -> Set Pass y\n -> Enter Pass1 7h15is@hardpA$sw0rd\n -> Enter Pass2 7h15is@hardpA$sw0rd\n -> Remove Anonymous y\n -> Disable Remote y\n -> Remove TestDB y\n -> Reload Privs y\n
 # Root User plugin=unix_socket(LogIn via Root) change rootPass wont matter; To use password [update mysql.user set plugin="mysql_native_password" where User='root';]
 printf "\ny\n$mysqlPass\n$mysqlPass\ny\ny\ny\ny\n" | sudo mysql_secure_installation
+
+# Secure mariaDB step1 remove local-infile
+# grep find if (local-infile=0) exist (if false ||) sed find (mysqld escape bracket) then (/a append) 
+
+grep -q "local-infile=0" /etc/mysql/mariadb.conf.d/50-server.cnf || sudo sed '/\[mysqld\]/a local-infile=0' /etc/mysql/mariadb.conf.d/50-server.cnf
+
+
+
+
+
+
 
 
 #config file
